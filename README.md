@@ -4,7 +4,7 @@
 Инструкции по запуску
 1. Установите Python (версия 3.x) на ваш компьютер, если он еще не установлен.
 2. Клонируйте репозиторий на локальный компьютер с помощью следующей команды:
-  git clone https://github.com/your_username/speed_typing_test.git
+  git clone https://github.com/torokar/SpeedTypingTest.git
 3. Перейдите в директорию проекта:
   cd speed_typing_test
 4. Запустите программу, введя следующую команду:
