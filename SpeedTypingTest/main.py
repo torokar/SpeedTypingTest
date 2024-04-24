@@ -1,8 +1,15 @@
 import time
-
+import keyboard as keyb
 
 print("Добро пожаловать в Speed typing test!")
 
+
+def _block():
+    block = ["ctrl", "v"]
+    for key in block:
+        keyb.block_key(key)
+    while True:
+        pass
 
 def time_typing_test(text, time_taken):
     num_char = len(text)
@@ -106,6 +113,7 @@ def compare_files(source_file, user_file):
         print(e)
         return None
 
+
 #Вывод результатов набора
 def _results():
     # --start_time отвечает за начало отчета секундомера
@@ -140,7 +148,9 @@ def _results():
 
 
 
+
 list_text()
 _results()
+_block()
 
 
