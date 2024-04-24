@@ -78,38 +78,35 @@ def list_text():
         else:
             print("Некорректный ввод.")
 
+#Функция расчитывающая точность набора текста
+def compare_files(source_file, user_file):
+    try:
+        with open(source_file, 'r', encoding='utf-8') as f_source:
+            source_text = f_source.read()
+        with open(user_file, 'r', encoding='utf-8') as f_user:
+            user_text = f_user.read()
 
-def compare_files(source_files, user_file):
-    similarities = []
-    for source_file in source_files:
-        try:
-            with open(source_file, 'r', encoding='utf-8') as f_source:
-                source_text = f_source.read()
-            with open(user_file, 'r', encoding='utf-8') as f_user:
-                user_text = f_user.read()
+        # Удаление символов переноса строки и пробелов для более точного сравнения
+        source_text = source_text.replace('\n', '').replace(' ', '')
+        user_text = user_text.replace('\n', '').replace(' ', '')
 
-            # Удаление символов переноса строки и пробелов для более точного сравнения
-            source_text = source_text.replace('\n', '').replace(' ', '')
-            user_text = user_text.replace('\n', '').replace(' ', '')
+        # Подсчет количества символов в каждом тексте
+        total_chars = len(source_text)
+        common_chars = sum(a == b for a, b in zip(source_text, user_text))
 
-            # Подсчет количества символов в каждом тексте
-            total_chars = len(source_text)
-            common_chars = sum(a == b for a, b in zip(source_text, user_text))
+        # Вычисление процента совпадения
+        similarity_percentage = (common_chars / total_chars) * 100
+        return similarity_percentage
 
-            # Вычисление процента совпадения
-            similarity_percentage = (common_chars / total_chars) * 100
-            similarities.append(similarity_percentage)
+    except FileNotFoundError:
+        print("Один из файлов не найден.")
+        return None
+    except Exception as e:
+        print("Произошла ошибка при сравнении файлов.")
+        print(e)
+        return None
 
-        except FileNotFoundError:
-            print("Один из файлов не найден.")
-            return None
-        except Exception as e:
-            print("Произошла ошибка при сравнении файлов.")
-            print(e)
-            return None
-
-    return similarities
-
+#Вывод результатов набора
 def _results():
     # --start_time отвечает за начало отчета секундомера
     start_time = time.time()
@@ -133,14 +130,13 @@ def _results():
     print("Скорость печати:", round(typing_speed), "знаков в минуту")
 
     print(f"Длительность {round(delta_time, 2)} минут.")
-    # Проверка точности
-    source_files = ["Text\\1_level.txt"]
-    user_file_path = "enter.txt"
-    similarities = compare_files(source_files, user_file_path)
-    if similarities is not None:
-        avg_similarity = sum(similarities) / len(similarities)
-        print(f"Средний процент совпадения текстов: {avg_similarity:.2f}%")
 
+    # Проверка точности сравнения с одним файлом
+    source_file = "Text\\1_level.txt"
+    user_file_path = "enter.txt"
+    similarity = compare_files(source_file, user_file_path)
+    if similarity is not None:
+        print(f"Процент точности: {similarity:.2f}%")
 
 
 
