@@ -5,11 +5,10 @@ print("Добро пожаловать в Speed typing test!")
 
 
 def _block():
-    block = ["ctrl", "v"]
+    block = ['windows', 'ctrl']
     for key in block:
         keyb.block_key(key)
-    while True:
-        pass
+
 
 def time_typing_test(text, time_taken):
     num_char = len(text)
@@ -148,9 +147,9 @@ def _results():
 
 
 
-
+_block()
 list_text()
 _results()
-_block()
+
 
 
