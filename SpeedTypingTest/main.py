@@ -16,7 +16,7 @@ def time_typing_test(text, time_taken):
     return typing_speed
 
 
-def list_text():
+def choice_difficulty():
     engine = True
     input("Нажмите Enter чтобы начать. ")
     while engine:
@@ -25,7 +25,7 @@ def list_text():
             print("Программа закрыта.")
             engine = False
             return None
-        elif choice_users in ('1', '2', '3', '4'):
+        elif choice_users in ('1', '2', '3', '4','5'):
             file_path = f'Text\\{choice_users}_level.txt'
             print("\n")
             try:
@@ -93,17 +93,18 @@ def _results(file_path):
         typing_speed = time_typing_test(Text_input, time_taken)
         print("Скорость печати:", round(typing_speed), "знаков в минуту")
 
-        print(f"Длительность {round(delta_time, 2)} минут.")
+        print(f"Длительность: {round(delta_time, 2)} минут.")
 
         # Проверка точности сравнения с одним файлом
         user_file_path = "enter.txt"
         similarity = compare_files(file_path, user_file_path)
         if similarity is not None:
-            print(f"Процент точности: {similarity:.2f}%")
-    else:
-        print("Некорректный путь к файлу.")
+            print(f"Процент точности: {similarity:.2f} %")
+    # else:
+    #     print("Некорректный путь к файлу.")
 
 
 _block()
-file_path = list_text()
+file_path = choice_difficulty()
 _results(file_path)
+
