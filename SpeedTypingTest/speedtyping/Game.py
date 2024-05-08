@@ -18,6 +18,13 @@ pygame.display.set_caption("")
 start_button = Button(WIDTH/2-(250/2), 200, 300, 100, "",
                       "image/green_button.png","image/green_button_hover.png", "button.mp3")
 
+
+def reset_test():
+    # Сброс на исходные значения
+    user_text = ""
+    symbols_enter = 0
+    time_start = time.time()
+
 #Функция которая загружает изображения иконки и заднего фона
 def load_image():
     icon = pygame.image.load("image/icon1.png")
@@ -33,6 +40,8 @@ def setup_users_inter(font, input_font):
     color_active = pygame.Color('Yellow') #цвет поля ввода, активированного
     color_passive = pygame.Color('White') #цвет поля ввода, неактивированного
     return text_, input_rect, color_active, color_passive
+
+
 
 #Сам запуск теста
 def start_test():
@@ -71,6 +80,12 @@ def start_test():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                #Вызов функции reset_test(), которая обнуляет все значения введеное в прошлом тесте
+                #И сразу вызов функции start_test() для отображения нового текста
+                if event.key == pygame.K_ESCAPE:
+                    reset_test()
+                    start_test()
 
             """Обработка события нажатия на клавишу мыши и 
             нажатия на кнопку удаления BACKSPACE"""
@@ -105,8 +120,8 @@ def start_test():
                                 f"Скорость печати: {round(typing_speed, 2)} знаков в минуту", True,
                                 pygame.Color('White'))
                             # game_end = True
-                        elif event.key == pygame.K_ESCAPE:
-                            return
+
+
 
 
                     else:
@@ -137,6 +152,8 @@ def start_test():
         clock.tick(FRAME_RATE)
 
 #Основная функция запуска приложения
+
+
 
 
 def main_menu():
@@ -170,5 +187,5 @@ def main_menu():
         start_button.check_hover(pygame.mouse.get_pos())
         pygame.display.flip()
 
-
 main_menu()
+
