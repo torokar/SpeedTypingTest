@@ -5,7 +5,7 @@ import random
 import time
 
 #Размер окна и добавления количества кадров в секнду
-WIDTH, HEIGHT = 750, 500
+WIDTH, HEIGHT = 800, 550
 FRAME_RATE = 60
 pygame.init()
 
@@ -17,8 +17,6 @@ pygame.display.set_caption("")
 #изначальная кнопка пуск
 start_button = Button(WIDTH/2-(250/2), 200, 300, 100, "",
                       "image/green_button.png","image/green_button_hover.png", "button.mp3")
-
-
 def reset_test():
     # Сброс на исходные значения
     user_text = ""
@@ -47,7 +45,7 @@ def setup_users_inter(font, input_font):
 def start_test():
     background = pygame.image.load("image/background.jpg")
     font = pygame.font.Font(None, 60)
-    input_font = pygame.font.Font(None, 36)
+    input_font = pygame.font.Font(None, 32)
     clock = pygame.time.Clock()
     user_text = "" #сюды помещается текст который вводит пользователь
 
@@ -60,22 +58,17 @@ def start_test():
     text_, input_rect, color_active, color_passive = setup_users_inter(font, input_font)
 
     active = False
-    # time_start = None
     users_time = None
     symbols_enter = 0
-    game_end = True
 
     """Начала отсчета времени для расчета времени который пользователь 
     затратил на прохождения теста и расчета введеных количество символов в минуту"""
     time_start = time.time()
 
     while True:
-
-
-
         window.blit(background, (0, 0))
-        window.blit(file_surf, (50, 100))
-        window.blit(text_, (150, 10))
+        window.blit(file_surf, (20, 100))
+        window.blit(text_, (180, 10))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -94,7 +87,6 @@ def start_test():
                     active = True
                 else:
                     active = False
-                    #
             elif event.type == pygame.KEYDOWN:
                 if active:
                     if event.key == pygame.K_BACKSPACE:
@@ -119,11 +111,6 @@ def start_test():
                             characters_minute = input_font.render(
                                 f"Скорость печати: {round(typing_speed, 2)} знаков в минуту", True,
                                 pygame.Color('White'))
-                            # game_end = True
-
-
-
-
                     else:
                         user_text += event.unicode
                         symbols_enter += 1
@@ -137,8 +124,6 @@ def start_test():
         pygame.draw.rect(window, color, input_rect, 2)
         text_surf = input_font.render(user_text, True, (255, 255, 255))
         window.blit(text_surf, (input_rect.x + 5, input_rect.y + 5))
-
-
         input_rect.w = max(10, text_surf.get_width() + 10)
 
         if users_time is not None:
@@ -146,16 +131,11 @@ def start_test():
             window.blit(users_time, (10, 300))
             window.blit(characters_minute, (10, 350))
 
-
         pygame.display.flip()
         pygame.display.set_caption("Скорость печати")
         clock.tick(FRAME_RATE)
 
 #Основная функция запуска приложения
-
-
-
-
 def main_menu():
     run = True
     icon = pygame.image.load("image/icon1.png")
@@ -164,12 +144,10 @@ def main_menu():
     while run:
         background_start_window = pygame.image.load("image/background2.jpg")
         window.blit(background_start_window, (0, 0))
-
-
         font = pygame.font.Font(None, 72)
 
         text_surf = font.render("ТЕСТ НА СКОРОСТЬ ПЕЧАТИ", True, ('Yellow'))
-        text_rect = text_surf.get_rect(center=(380, 50))
+        text_rect = text_surf.get_rect(center=(400, 50))
         window.blit(text_surf, text_rect)
 
         #Отображения кнопки начать
@@ -177,7 +155,6 @@ def main_menu():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
