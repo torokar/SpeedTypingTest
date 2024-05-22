@@ -41,4 +41,7 @@
 <img src="https://i.ibb.co/vZrzYwb/2.png" alt="Project Logo" width="500">
 <img src="https://i.ibb.co/9vfdKbZ/image.png" alt="Project Logo" width="500">
 <img src="https://i.ibb.co/ZgvN0Mm/image.png)" alt="Project Logo" width="500">
+
+## Выполнил 
+Онхонов А.А
     
